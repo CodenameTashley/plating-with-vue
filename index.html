@@ -1,0 +1,59 @@
+<html>
+
+<head>
+    <title>VueJs</title>
+    <link rel="stylesheet" type="text/css" href="custom.css">
+</head>
+
+<body>
+
+    <div id="app">
+
+        <form name="myForm" id="searchForm">
+            <input type="text" required v-model="searchText" placeholder="Enter Your Name" />
+            <button type="submit" v-on:click="greet(myForm)">Go</button> {{ searchText }}
+        </form>
+        <hr>
+
+        <table border="1">
+            <tr>
+                <th>Sr</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Action</th>
+            </tr>
+
+            <tr v-for="user in users" class="user-rows">
+                <td>{{ user.Sr }}</td>
+                <td>{{ user.Name }}</td>
+                <td>{{ user.Age }}</td>
+                <td>
+                    <button v-on:click="editUser(user);"><img src="edit.png" alt="edit.png"/></button>
+                    <button v-on:click="deleteUser(user);"><img src="delete.png" alt="delete.png"/></button>
+                </td>
+            </tr>
+            <tr id="menu-row">
+                <td colspan="4" class="right-align">
+                    <button v-on:click="">&gt;</button>
+                    <button v-on:click="">&lt;</button>
+                </td>
+            </tr>
+        </table>
+
+        <div id="addArea">
+            <span>Name</span>
+            <input type="text" placeholder="Name" v-model="newUser.Name"/>
+            <span>Age</span>
+            <input type="number" min="0" max="125" placeholder="Age" v-model="newUser.Age"/>
+            <button v-on:click="submit(newUser)"><img src="save.png" alt="save.png">Submit</button>
+        </div>
+
+
+    </div>
+
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
+    <script src="custom.js"></script>
+</body>
+
+</html>
