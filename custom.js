@@ -24,49 +24,66 @@ function editUser(user) {
   vm.newUser = user;
 }
 
-function deleteUser(user){
-  vm.users = vm.users.filter(function (element) {
-    if  (element.Sr !== user.Sr) {
-      return element;
+function deleteUser(user) {
+  console.log(user);
+  _.forEach(vm.users, function (element) {
+
+    if (element.Sr === user.Sr) {
+      element.visible = false;
     }
   });
+
 }
 
 function submit() {
-  if (newUser.hasOwnProperty("Sr")) {
+  if (vm.newUser.hasOwnProperty("Sr")) {
     /* Edit */
-  }else{
+    _.forEach(vm.users, function (element) {
+      if (element.Sr === vm.newUser.Sr) {
+        element.Name = vm.newUser.Name;
+        element.Age = vm.newUser.Age;
+      }
+    });
+
+  } else {
     /* Add */
-    var newSr = vm.users.length + 1;
-    
-    
+    vm.newUser.Sr = vm.users.length + 1;
+    vm.newUser.visible = true;
+    vm.users.push(vm.newUser);
+    vm.newUser = {};
+
   }
 }
 
 vm.users = [{
     Sr: 1,
     Name: "Parvez Alam",
-    Age: 28
+    Age: 28,
+    visible: true
   },
   {
     Sr: 2,
     Name: "Sameer",
-    Age: 13
+    Age: 13,
+    visible: true
   },
   {
     Sr: 3,
     Name: "Rakesh",
-    Age: 55
+    Age: 55,
+    visible: true
   },
   {
     Sr: 4,
     Name: "Ramesh",
-    Age: 44
+    Age: 44,
+    visible: true
   },
   {
     Sr: 5,
     Name: "Aman",
-    Age: 34
+    Age: 34,
+    visible: false
   }
 ]
 
