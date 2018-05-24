@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Shopping App</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div id="app">
+        <div class="jumbotron">
+            <h1 class="text-center">{{ appTitle }}</h1>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <table class="table table-striped">
+                    <th>
+                        <td>Description</td>
+                        <td>Quantity</td>
+                    </th>
+                    <tr v-for="item in items">
+                        <td>
+                            <input type="checkbox" class="checkbox">
+                        </td>
+                        <td>{{ item.desc }}</td>
+                        <td>{{ item.quantity }}</td>
+                    </tr>
+                </table>
+
+                <div novalidate>
+                    <div class="form-group">
+                        <input v-model="newItem.desc" type="text" class="form-control" aria-describedby="descriptionHelp">
+                        <small id="descriptionHelp" class="form-text text-muted">Description of new Item.</small>
+                    </div>
+                    <div class="form-group">
+                        <input v-model="newItem.quantity" min="0" max="10" type="number" class="form-control" aria-describedby="quantityHelp">
+                        <small id="quantityHelp" class="form-text text-muted">Quantity of new Item.</small>
+                    </div>
+                    <button class="btn btn-primary" v-on:click="addNewItem();">Submit</button>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        var data = {
+            appTitle: 'My Shopping List.',
+            items: [{
+                    desc: "rice",
+                    quantity: 1,
+                    purchased: false
+                },
+                {
+                    desc: "milk",
+                    quantity: 2,
+                    purchased: false
+                }, {
+                    desc: "biscuit",
+                    quantity: 4,
+                    purchased: false
+                }, {
+                    desc: "flour",
+                    quantity: 1,
+                    purchased: false
+                }
+            ],
+            newItem: {
+                purchased: false
+            }
+        };
+
+        var app = new Vue({
+            el: '#app',
+            data: data,
+            methods: {
+                addNewItem: function () {
+                    this.items.push(Object.assign({}, this.newItem));
+                    this.newItem = {
+                        purchased: false
+                    };
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
